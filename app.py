@@ -1,4 +1,3 @@
-
 from dotenv import load_dotenv
 import os
 from flask import Flask, request, abort
@@ -15,8 +14,8 @@ app = Flask(__name__)
 LINE_CHANNEL_ACCESS_TOKEN = os.getenv('LINE_CHANNEL_ACCESS_TOKEN')
 LINE_CHANNEL_SECRET = os.getenv('LINE_CHANNEL_SECRET')
 
-line_bot_api = LineBotApi('KVtp3swdgZK370NpayGSULlq1WTwRxqPvKszjUmzYKWrMh3Q2v7mwYpOBUqPQJ3FjFTggG0FSujedujlmiA6zxDo8lyjWTUQzckwMpGhidTZRz005rx2TNR1WYxtZK821b0uzZCtRdfDH7pMgbt8oAdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('27f9a3e7ccb66b071d9b0f3b1bc26ac5')
+line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
+handler = WebhookHandler(LINE_CHANNEL_SECRET)
 
 # Webhook callback
 @app.route("/callback", methods=['POST'])
@@ -29,10 +28,10 @@ def callback():
     except InvalidSignatureError:
         abort(400)
 
-
     return 'OK'
 
-# เมื่อมีข้อความเข้ามา
+
+# เมื่มีข้อความเข้ามา
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     text = event.message.text.strip()
@@ -41,6 +40,7 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text=reply)
     )
+
 
 # ดึงข้อมูลพยากรณ์ฝนจาก OpenWeather (API ฟรี)
 def get_rain_forecast(city):
@@ -54,14 +54,14 @@ def get_rain_forecast(city):
         temp = data['main']['temp']
         chance_of_rain = data.get('1h', 0)
         return "\n".join([
-            f"🌤️ สภาพอากาศที่ {city}:",
+            f"🌤 สภาพอากาศที่ {city}:",
             f"โอกาสฝนตก {chance_of_rain} มม.",
             f"สภาพอากาศ: {desc}, อุณหภูมิ {temp}°C"
         ])
-
     except Exception as e:
-            return f"เกิดข้อผิดพลาดในการดึงข้อมูล: {e}"
+        return f"เกิดข้อผิดพลาดในการดึงข้อมูล: {e}"
 
 
+# 🔧 จุดเริ่มต้นโปรแกรม
 if __name__ == "__main__":
     app.run()
