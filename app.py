@@ -50,6 +50,9 @@ def get_rain_forecast(city):
     try:
         res = requests.get(url)
         data = res.json()
+
+        print(data)  # ✅ เพิ่มตรงนี้เพื่อดูว่า API ตอบอะไรกลับมา
+        
         if "weather" not in data or "main" not in data:
             return "⚠️ ไม่พบข้อมูลสภาพอากาศของเมืองนี้ กรุณาตรวจสอบชื่อเมืองอีกครั้ง"
 
