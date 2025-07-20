@@ -59,7 +59,7 @@ def get_rain_forecast(city):
         ])
 
     except Exception as e:
-        return f"เกิดข้อผิดพลาดในการดึงข้อมูล: {e}"
+            return f"เกิดข้อผิดพลาดในการดึงข้อมูล: {e}"
 
 
 if __name__ == "__main__":
