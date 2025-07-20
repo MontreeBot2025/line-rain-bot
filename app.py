@@ -28,7 +28,7 @@ def callback():
     except InvalidSignatureError:
         abort(400)
 
-    return 'OK'
+    return 'OK', 200
 
 
 # เมื่มีข้อความเข้ามา
