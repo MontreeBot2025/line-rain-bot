@@ -45,7 +45,7 @@ def handle_message(event):
 # ดึงข้อมูลพยากรณ์ฝนจาก OpenWeather (API ฟรี)
 def get_rain_forecast(city):
     API_KEY = os.getenv('OPENWEATHER_API_KEY')
-    url = f'https://api.openweathermap.org/data/2.5/weather?q={city},TH&appid=' + API_KEY + '&units=metric&lang=th'
+    url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid=' + API_KEY + '&units=metric&lang=th'
 
     try:
         res = requests.get(url)
