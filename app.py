@@ -64,4 +64,4 @@ def get_rain_forecast(city):
 
 # 🔧 จุดเริ่มต้นโปรแกรม
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
