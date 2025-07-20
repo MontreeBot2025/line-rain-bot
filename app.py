@@ -29,6 +29,7 @@ def callback():
     except InvalidSignatureError:
         abort(400)
 
+
     return 'OK'
 
 # เมื่อมีข้อความเข้ามา
