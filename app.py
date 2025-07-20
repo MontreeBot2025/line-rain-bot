@@ -64,4 +64,4 @@ def get_rain_forecast(city):
 
 
 if __name__ == "__main__":
-app.run()
+    app.run()
